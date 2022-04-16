@@ -207,6 +207,29 @@ paths:
         500:
           description: internal server error
 
+  /imageupload:
+    post:
+      tags: 
+        - Strings
+      summary: uploading image
+      requestBody:
+        content: 
+          multipart/form-data:
+            schema: 
+                type: object
+                properties:
+                  file: 
+                    type: string
+                    format: binary
+      responses:
+        201: 
+          description: Object created successfully
+        400: 
+          description: Bad request
+        500:
+          description: internal server error
+
+
 
 
 
