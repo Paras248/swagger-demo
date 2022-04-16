@@ -1,0 +1,229 @@
+openapi: 3.0.0
+info:
+  title: Learn Express And Swagger - Paras
+  description: A course segment about writing docs
+  version: 1.1.0
+  contact:
+    email: paraspatil248@gmail.com
+    url: "https://paras248.github.io"
+
+# servers: 
+#   - url: "http://localhost:4000/api/v1"
+#     description: For localhost - regular
+#   - url: "https://localhost:4000/api/v1"
+#     description: For localhost - secure
+
+servers: 
+  - url: "{protocol}://localhost:4000/api/{version}"
+    description: For localhost
+    variables: 
+      version: 
+        enum:
+          - v1
+          - v2
+        default: v1
+      protocol:
+        enum:
+          - http
+          - https
+        default: http
+
+components: 
+  securitySchemes:
+    cookiesAuth:
+      type: apiKey
+      in: cookies
+      name: token
+
+    BearerAuth:
+      type: http
+      scheme: bearer
+
+paths:
+  /course: 
+    get:
+      tags:
+        - Strings
+      summary: returns a greet message from paras
+      responses: 
+        200:
+          description: Success
+          content: 
+            application/json:
+              schema: 
+                type: string
+                example: "mystring"
+        400: 
+          description: Bad request
+        500:
+          description: internal server error
+
+  /courseObject:
+    get: 
+      tags: 
+        - object
+      summary: Returns an parasObject
+      responses: 
+        200:
+          description: success
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:  
+                    id: 
+                      type: string
+                    name: 
+                      type: string
+                    price: 
+                      type: number
+        400: 
+          description: Bad request
+        500:
+          description: internal server error
+
+  /courses:
+    get:
+      tags:
+        - Arrays
+      summary: Returns an Array of courses
+      responses: 
+        200:
+          description: success
+          content: 
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: object
+                  properties:
+                    id: 
+                      type: string
+                    name: 
+                      type: string
+                    price:
+                      type: number
+        400: 
+          description: Bad request
+        500:
+          description: internal server error
+  /mycourse/{courseId}:
+    get:
+      tags:
+        - Strings
+      summary: Returns value matching to the id in the parameters
+      parameters: 
+        - name: courseId
+          in: path
+          required: true
+          default: 11
+          schema: 
+            type: string
+      responses:
+        200:
+          description: success
+          content: 
+            application/json:
+              schema:
+                type: object
+                  properties:
+                    id: 
+                      type: string
+                    name: 
+                      type: string
+                    price:
+                      type: number
+        400: 
+          description: Bad request
+        500:
+          description: internal server error
+
+  /addCourses:
+    post:
+      tags: 
+        - Strings
+      summary: Adds a new course to existing courses
+      consumes: 
+        - application/json
+      produces: 
+        - application/json
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema: 
+                type: object
+                properties:
+                  id: 
+                    type: string
+                  name: 
+                    type: string
+                  price:
+                    type: number
+      responses:
+        201: 
+          description: Object created successfully
+          content:
+            application/json:
+              schema:
+                type: boolean
+        400: 
+          description: Bad request
+        500:
+          description: internal server error
+  /coursequery:
+    get:
+      tags: 
+        - Strings
+      summary: trying to learn about query
+      parameters: 
+        - name: location
+          in: query
+          required: true
+          schema: 
+            type: string
+            enum: [delhi, london, jaipur]
+        - name: device
+          in: query
+          required: true
+          schema: 
+            type: string
+            enum: [mobile, web]
+         
+      responses:
+        200: 
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  location: 
+                    type: string
+                  device:
+                    type: string
+        400: 
+          description: Bad request
+        500:
+          description: internal server error
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

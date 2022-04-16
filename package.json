@@ -1,0 +1,19 @@
+{
+  "name": "mydocsbackend",
+  "version": "1.0.0",
+  "description": "this is to practice swagger",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Paras",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "swagger-ui-express": "^4.3.0",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
